@@ -19,15 +19,41 @@ public class Disciplina {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @JoinColumn(name = "aulas_id")
+
+    @OneToMany
+    @JoinColumn(name = "disciplina_id")
     private List<Aula> aulas = new ArrayList<>();
-    @JoinColumn(name = "cursos_id")
+
+    @ManyToMany
+    @JoinTable(
+            name = "disciplinas_cursos",
+            joinColumns = @JoinColumn(name = "disciplina_id"),
+            inverseJoinColumns = @JoinColumn(name = "curso_id")
+    )
     private List<Curso> cursos = new ArrayList<>();
-    @JoinColumn(name = "turmas_id")
+
+    @ManyToMany
+    @JoinTable(
+            name = "disciplinas_turmas",
+            joinColumns = @JoinColumn(name = "disciplina_id"),
+            inverseJoinColumns = @JoinColumn(name = "turma_id")
+    )
     private List<Turma> turmas = new ArrayList<>();
-    @JoinColumn(name = "alunos_id")
+
+    @ManyToMany
+    @JoinTable(
+            name = "disciplinas_alunos",
+            joinColumns = @JoinColumn(name = "disciplina_id"),
+            inverseJoinColumns = @JoinColumn(name = "aluno_id")
+    )
     private List<Aluno> alunos = new ArrayList<>();
-    @JoinColumn(name = "professores_id")
+
+    @ManyToMany
+    @JoinTable(
+            name = "disciplinas_professores",
+            joinColumns = @JoinColumn(name = "disciplina_id"),
+            inverseJoinColumns = @JoinColumn(name = "professor_id")
+    )
     private List<Professor> professores = new ArrayList<>();
     private String codigoDisciplina;
 }

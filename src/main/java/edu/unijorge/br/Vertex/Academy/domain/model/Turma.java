@@ -26,6 +26,7 @@ public class Turma {
             inverseJoinColumns = @JoinColumn(name = "aluno_id")
     )
     private List<Aluno> alunos = new ArrayList<>();
+    @ManyToOne
     @JoinColumn(name = "curso_id")
     private Curso curso;
     @ManyToMany

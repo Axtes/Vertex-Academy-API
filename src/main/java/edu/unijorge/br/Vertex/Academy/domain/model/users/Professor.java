@@ -4,8 +4,7 @@ import edu.unijorge.br.Vertex.Academy.domain.model.Curso;
 import edu.unijorge.br.Vertex.Academy.domain.model.Disciplina;
 import edu.unijorge.br.Vertex.Academy.domain.model.Especializacao;
 import edu.unijorge.br.Vertex.Academy.domain.model.Turma;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Setter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -18,15 +17,46 @@ import java.util.List;
 @Entity(name = "Professor")
 @Setter
 public class Professor extends Usuario {
+    @Enumerated(EnumType.STRING)
     private Especializacao especializacao;
+
     private String biografia;
+
+    @ManyToMany
+    @JoinTable(
+            name = "professores_cursos",
+            joinColumns = @JoinColumn(name = "professor_id"),
+            inverseJoinColumns = @JoinColumn(name = "curso_id")
+    )
     private List<Curso> cursos = new ArrayList<>();
+
+    @ManyToMany
+    @JoinTable(
+            name = "professores_turmas",
+            joinColumns = @JoinColumn(name = "professor_id"),
+            inverseJoinColumns = @JoinColumn(name = "turma_id")
+    )
     private List<Turma> turmas = new ArrayList<>();
+
+    @ManyToMany
+    @JoinTable(
+            name = "professores_disciplinas",
+            joinColumns = @JoinColumn(name = "professor_id"),
+            inverseJoinColumns = @JoinColumn(name = "disciplina_id")
+    )
     private List<Disciplina> disciplinas = new ArrayList<>();
+
+    @ManyToMany
+    @JoinTable(
+            name = "professores_alunos",
+            joinColumns = @JoinColumn(name = "professor_id"),
+            inverseJoinColumns = @JoinColumn(name = "aluno_id")
+    )
     private List<Aluno> alunos = new ArrayList<>();
+
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of( new SimpleGrantedAuthority("TEACHER"));
+        return List.of( new SimpleGrantedAuthority("ROLE_TEACHER"));
     }
 }

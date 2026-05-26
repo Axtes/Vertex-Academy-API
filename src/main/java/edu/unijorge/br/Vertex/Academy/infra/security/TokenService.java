@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
+import java.util.UUID;
 
 @Service
 public class TokenService {
@@ -27,7 +28,9 @@ public class TokenService {
         return secretRepository.findAll().stream().findFirst()
                 .map(Secret::getTokenSecret)
                 .orElseGet(() -> {
+
                     Secret secret = new Secret();
+                    secret.setTokenSecret(UUID.randomUUID().toString());
                     secretRepository.save(secret);
                     return secret.getTokenSecret();
                 });
@@ -40,6 +43,7 @@ public class TokenService {
                     .withIssuer("API Vertex Academy")
                     .withSubject(usuario.getEmail())
                     .withClaim("id", usuario.getId())
+                    .withExpiresAt(tokenExpiracao())
                     .sign(algoritmo);
         } catch (JWTCreationException exception) {
             throw new RuntimeException("Erro ao gerar token JWT", exception);

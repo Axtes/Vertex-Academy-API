@@ -3,9 +3,7 @@ package edu.unijorge.br.Vertex.Academy.domain.model.users;
 import edu.unijorge.br.Vertex.Academy.domain.model.Curso;
 import edu.unijorge.br.Vertex.Academy.domain.model.Disciplina;
 import edu.unijorge.br.Vertex.Academy.domain.model.Turma;
-import jakarta.persistence.Entity;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Setter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -18,16 +16,36 @@ import java.util.List;
 @Table(name = "alunos")
 @Setter
 public class Aluno extends Usuario{
-    @JoinColumn(name = "curso_id")
+
+    @ManyToMany
+    @JoinTable(
+            name = "alunos_cursos",
+            joinColumns = @JoinColumn(name = "aluno_id"),
+            inverseJoinColumns = @JoinColumn(name = "curso_id")
+    )
     private List<Curso> cursos = new ArrayList<>();
-    @JoinColumn(name = "turmas_id")
+
+
+    @ManyToMany
+    @JoinTable(
+            name = "alunos_turmas",
+            joinColumns = @JoinColumn(name = "aluno_id"),
+            inverseJoinColumns = @JoinColumn(name = "turma_id")
+    )
     private List<Turma> turmas = new ArrayList<>();
-    @JoinColumn(name = "disciplinas_id")
+
+
+    @ManyToMany
+    @JoinTable(
+            name = "alunos_disciplinas",
+            joinColumns = @JoinColumn(name = "aluno_id"),
+            inverseJoinColumns = @JoinColumn(name = "disciplina_id")
+    )
     private List<Disciplina> disciplinas = new ArrayList<>();
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of( new SimpleGrantedAuthority("STUDENT"));
+        return List.of( new SimpleGrantedAuthority("ROLE_STUDENT"));
     }
 
 }

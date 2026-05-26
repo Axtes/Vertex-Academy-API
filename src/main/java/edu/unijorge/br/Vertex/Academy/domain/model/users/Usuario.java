@@ -7,6 +7,8 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+
 import java.util.Collection;
 import java.util.List;
 
@@ -34,7 +36,7 @@ public class Usuario implements UserDetails {
     @Setter
     private String telefone;
     @Setter
-    private Long matricula;
+    private String matricula;
 
 
     @Override
@@ -52,4 +54,11 @@ public class Usuario implements UserDetails {
         return email;
     }
 
+//    public void gerarMatricula(Usuario usuarioA) {
+//        LocalDateTime data = LocalDateTime.now();
+//        Integer anoC = data.getYear();
+//        Integer ano = anoC % 100;
+//        Integer st = (data.getMonthValue() <= 6? 1:2);
+//
+//    }
 }

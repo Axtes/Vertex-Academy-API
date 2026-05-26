@@ -1,4 +1,4 @@
-package edu.unijorge.br.Vertex.Academy.service;
+package edu.unijorge.br.Vertex.Academy;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
