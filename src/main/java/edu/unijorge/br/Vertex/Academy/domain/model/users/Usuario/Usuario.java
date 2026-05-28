@@ -1,4 +1,4 @@
-package edu.unijorge.br.Vertex.Academy.domain.model.users;
+package edu.unijorge.br.Vertex.Academy.domain.model.users.Usuario;
 
 import jakarta.persistence.*;
 import lombok.*;
@@ -7,8 +7,8 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 
+import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.List;
 
@@ -22,6 +22,7 @@ import java.util.List;
 public class Usuario implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Setter(AccessLevel.PROTECTED)
     private Long id;
     @Setter
     private String nome;
@@ -36,6 +37,7 @@ public class Usuario implements UserDetails {
     @Setter
     private String telefone;
     @Setter
+    @Column(unique = true)
     private String matricula;
 
 
@@ -54,11 +56,13 @@ public class Usuario implements UserDetails {
         return email;
     }
 
-//    public void gerarMatricula(Usuario usuarioA) {
-//        LocalDateTime data = LocalDateTime.now();
-//        Integer anoC = data.getYear();
-//        Integer ano = anoC % 100;
-//        Integer st = (data.getMonthValue() <= 6? 1:2);
-//
-//    }
+    public String gerarMatricula() {
+        LocalDateTime data = LocalDateTime.now();
+        Integer anoC = data.getYear();
+        Integer ano = anoC % 100;
+        Integer st = (data.getMonthValue() <= 6? 1:2);
+        Long sqc = ano+st+getId();
+
+        return anoC + "" + st + String.format("%03d", sqc);
+    }
 }

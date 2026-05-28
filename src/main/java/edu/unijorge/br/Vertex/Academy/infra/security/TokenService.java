@@ -4,8 +4,8 @@ import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.exceptions.JWTCreationException;
 import com.auth0.jwt.exceptions.JWTVerificationException;
-import edu.unijorge.br.Vertex.Academy.domain.model.users.Usuario;
-import edu.unijorge.br.Vertex.Academy.domain.model.users.UsuarioRepository;
+import edu.unijorge.br.Vertex.Academy.domain.model.users.Usuario.Usuario;
+import edu.unijorge.br.Vertex.Academy.domain.model.users.Usuario.UsuarioRepository;
 import org.springframework.stereotype.Service;
 
 import java.time.Instant;

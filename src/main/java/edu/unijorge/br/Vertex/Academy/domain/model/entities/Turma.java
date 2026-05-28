@@ -1,7 +1,7 @@
-package edu.unijorge.br.Vertex.Academy.domain.model;
+package edu.unijorge.br.Vertex.Academy.domain.model.entities;
 
 
-import edu.unijorge.br.Vertex.Academy.domain.model.users.Aluno;
+import edu.unijorge.br.Vertex.Academy.domain.model.users.Aluno.Aluno;
 import jakarta.persistence.*;
 import lombok.*;
 

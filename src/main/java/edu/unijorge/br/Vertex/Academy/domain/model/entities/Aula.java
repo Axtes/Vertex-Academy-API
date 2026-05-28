@@ -1,4 +1,4 @@
-package edu.unijorge.br.Vertex.Academy.domain.model;
+package edu.unijorge.br.Vertex.Academy.domain.model.entities;
 
 import jakarta.persistence.*;
 import lombok.*;

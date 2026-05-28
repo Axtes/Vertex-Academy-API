@@ -1,9 +1,11 @@
-package edu.unijorge.br.Vertex.Academy.domain.model.users;
+package edu.unijorge.br.Vertex.Academy.domain.model.users.Professor;
 
-import edu.unijorge.br.Vertex.Academy.domain.model.Curso;
-import edu.unijorge.br.Vertex.Academy.domain.model.Disciplina;
-import edu.unijorge.br.Vertex.Academy.domain.model.Especializacao;
-import edu.unijorge.br.Vertex.Academy.domain.model.Turma;
+import edu.unijorge.br.Vertex.Academy.domain.model.entities.Curso;
+import edu.unijorge.br.Vertex.Academy.domain.model.entities.Disciplina;
+import edu.unijorge.br.Vertex.Academy.domain.model.entities.Especializacao;
+import edu.unijorge.br.Vertex.Academy.domain.model.entities.Turma;
+import edu.unijorge.br.Vertex.Academy.domain.model.users.Usuario.Usuario;
+import edu.unijorge.br.Vertex.Academy.domain.model.users.Aluno.Aluno;
 import jakarta.persistence.*;
 import lombok.Setter;
 import org.springframework.security.core.GrantedAuthority;

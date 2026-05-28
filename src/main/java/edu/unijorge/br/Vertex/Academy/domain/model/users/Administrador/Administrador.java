@@ -1,5 +1,6 @@
-package edu.unijorge.br.Vertex.Academy.domain.model.users;
+package edu.unijorge.br.Vertex.Academy.domain.model.users.Administrador;
 
+import edu.unijorge.br.Vertex.Academy.domain.model.users.Usuario.Usuario;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
 import org.springframework.security.core.GrantedAuthority;

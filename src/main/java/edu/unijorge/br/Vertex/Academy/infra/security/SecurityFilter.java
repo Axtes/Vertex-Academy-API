@@ -1,7 +1,7 @@
 package edu.unijorge.br.Vertex.Academy.infra.security;
 
-import edu.unijorge.br.Vertex.Academy.domain.model.users.Usuario;
-import edu.unijorge.br.Vertex.Academy.domain.model.users.UsuarioRepository;
+import edu.unijorge.br.Vertex.Academy.domain.model.users.Usuario.Usuario;
+import edu.unijorge.br.Vertex.Academy.domain.model.users.Usuario.UsuarioRepository;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
