@@ -2,18 +2,16 @@ package edu.unijorge.br.Vertex.Academy.service;
 
 import edu.unijorge.br.Vertex.Academy.domain.model.entities.Curso;
 import edu.unijorge.br.Vertex.Academy.domain.model.entities.CursoRepository;
+import edu.unijorge.br.Vertex.Academy.domain.model.entities.Turma;
+import edu.unijorge.br.Vertex.Academy.domain.model.entities.TurmaRepository;
 import edu.unijorge.br.Vertex.Academy.domain.model.users.Usuario.Usuario;
 import edu.unijorge.br.Vertex.Academy.domain.model.users.Usuario.UsuarioRepository;
-import edu.unijorge.br.Vertex.Academy.domain.model.users.Aluno.Aluno;
 import edu.unijorge.br.Vertex.Academy.domain.model.users.Aluno.AlunoRepository;
 import edu.unijorge.br.Vertex.Academy.domain.model.users.Aluno.DadosInscricaoAluno;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
-
-import java.util.Optional;
-
 
 @Service
 public class AlunoService {
@@ -25,6 +23,12 @@ public class AlunoService {
 
     @Autowired
     CursoRepository cursoRepository;
+
+    @Autowired
+    TurmaRepository turmaRepository;
+
+    @Autowired
+    TurmaService turmaService;
 
     @Transactional
     public void inscreverAluno(
@@ -45,7 +49,7 @@ public class AlunoService {
 
             String matricula = usuario.gerarMatricula();
 
-            while (alunoRepository.existsByMatricula(matricula)) {
+            while (usuarioRepository.existsByMatricula(matricula)) {
                 Long numero = Long.parseLong(matricula);
                 matricula = String.valueOf(numero + 1);
             }
@@ -55,9 +59,15 @@ public class AlunoService {
             usuarioRepository.save(usuario);
         }
 
+        Turma turma = turmaService.obterOuCriarTurmaDisponivel(curso);
+
+        turma.getAlunos().add(usuario);
+        turmaRepository.save(turma);
+
         alunoRepository.promoverAluno(
                 usuario.getId(),
-                curso.getId()
+                curso.getId(),
+                turma.getId()
         );
     }
 }

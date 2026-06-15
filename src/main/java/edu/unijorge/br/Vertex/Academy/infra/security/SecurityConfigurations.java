@@ -32,6 +32,7 @@ public class SecurityConfigurations {
                         .requestMatchers(HttpMethod.POST, "/auth/login").permitAll()
                         .requestMatchers(HttpMethod.POST, "/inscricao").hasAuthority("ROLE_USER")
                         .requestMatchers(HttpMethod.POST, "/admin/**").hasAuthority("ROLE_ADMIN")
+//                        .requestMatchers("/service/usuarios/cpf/**").
                         .anyRequest().authenticated())
                 .addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class)
                 .build();

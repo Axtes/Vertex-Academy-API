@@ -2,9 +2,12 @@ package edu.unijorge.br.Vertex.Academy.domain.model.entities;
 
 
 import edu.unijorge.br.Vertex.Academy.domain.model.users.Aluno.Aluno;
+import edu.unijorge.br.Vertex.Academy.domain.model.users.Usuario.Usuario;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,7 +28,7 @@ public class Turma {
             joinColumns = @JoinColumn(name = "turma_id"),
             inverseJoinColumns = @JoinColumn(name = "aluno_id")
     )
-    private List<Aluno> alunos = new ArrayList<>();
+    private List<Usuario> alunos = new ArrayList<>();
     @ManyToOne
     @JoinColumn(name = "curso_id")
     private Curso curso;
@@ -37,4 +40,21 @@ public class Turma {
     )
     private List<Disciplina> disciplinas = new ArrayList<>();
     private String codigoTurma;
+    private char referencia;
+    private Integer semestre;
+    private Integer ano;
+
+    public void gerarCodigoTurma(Turma turma){
+        LocalDate data = LocalDate.now();
+        ano = data.getYear();
+        semestre = data.getMonthValue() <= 6 ? 1 : 2;
+
+        String codigo =
+                turma.getCurso().getCodigoCurso()
+                        + turma.getAno()
+                        + String.format("%02d", turma.getSemestre())
+                        + turma.getReferencia();
+
+        turma.setCodigoTurma(codigo);
+    }
 }

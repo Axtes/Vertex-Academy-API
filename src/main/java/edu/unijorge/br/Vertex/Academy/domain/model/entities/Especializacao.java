@@ -1,5 +1,8 @@
 package edu.unijorge.br.Vertex.Academy.domain.model.entities;
 
+import lombok.Getter;
+
+@Getter
 public enum Especializacao {
     TECNICO("Técnico(a)"),
     LICENCIADO("Licenciado(a)"),
@@ -14,7 +17,4 @@ public enum Especializacao {
         this.especializacao = especializacao;
     }
 
-    public String getEspecializacao() {
-        return especializacao;
-    }
 }

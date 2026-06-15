@@ -5,7 +5,6 @@ import edu.unijorge.br.Vertex.Academy.domain.model.entities.Disciplina;
 import edu.unijorge.br.Vertex.Academy.domain.model.entities.Especializacao;
 import edu.unijorge.br.Vertex.Academy.domain.model.entities.Turma;
 import edu.unijorge.br.Vertex.Academy.domain.model.users.Usuario.Usuario;
-import edu.unijorge.br.Vertex.Academy.domain.model.users.Aluno.Aluno;
 import jakarta.persistence.*;
 import lombok.Setter;
 import org.springframework.security.core.GrantedAuthority;
@@ -47,14 +46,6 @@ public class Professor extends Usuario {
             inverseJoinColumns = @JoinColumn(name = "disciplina_id")
     )
     private List<Disciplina> disciplinas = new ArrayList<>();
-
-    @ManyToMany
-    @JoinTable(
-            name = "professores_alunos",
-            joinColumns = @JoinColumn(name = "professor_id"),
-            inverseJoinColumns = @JoinColumn(name = "aluno_id")
-    )
-    private List<Aluno> alunos = new ArrayList<>();
 
 
     @Override

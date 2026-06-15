@@ -4,8 +4,10 @@ import edu.unijorge.br.Vertex.Academy.domain.model.entities.Curso;
 import edu.unijorge.br.Vertex.Academy.domain.model.entities.DadosCadastroCurso;
 import edu.unijorge.br.Vertex.Academy.domain.model.entities.DadosCadastroDisciplina;
 import edu.unijorge.br.Vertex.Academy.domain.model.entities.Disciplina;
+import edu.unijorge.br.Vertex.Academy.domain.model.users.Professor.DadosCadastroProfessor;
 import edu.unijorge.br.Vertex.Academy.service.CursoService;
 import edu.unijorge.br.Vertex.Academy.service.DisciplinaService;
+import edu.unijorge.br.Vertex.Academy.service.ProfessorService;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +27,9 @@ public class AdministradorController {
     @Autowired
     DisciplinaService disciplinaService;
 
+    @Autowired
+    ProfessorService professorService;
+
     @PostMapping("/cadastrar-curso")
     public ResponseEntity<Curso> cadastrarCurso(@RequestBody @Valid DadosCadastroCurso dados) {
         Curso curso = cursoService.cadastrarCurso(dados);
@@ -37,5 +42,12 @@ public class AdministradorController {
         Disciplina disciplina = disciplinaService.cadastrarDisciplina(dados);
 
         return ResponseEntity.ok(disciplina);
+    }
+
+    @PostMapping("/cadastrar-professor")
+    public ResponseEntity cadastrarProfessor(@RequestBody @Valid DadosCadastroProfessor dados) {
+        professorService.cadastrarProfessor(dados);
+
+        return ResponseEntity.ok(dados);
     }
 }
