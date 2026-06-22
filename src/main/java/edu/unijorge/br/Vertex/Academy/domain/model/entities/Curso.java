@@ -23,6 +23,7 @@ public class Curso {
     private String codigoCurso;
     private Integer cargaHoraria;
     private Integer semestres;
+    private String descricao;
 
     @ManyToMany
     @JoinTable(

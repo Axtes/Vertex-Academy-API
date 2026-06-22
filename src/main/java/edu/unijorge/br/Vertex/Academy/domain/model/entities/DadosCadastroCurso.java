@@ -7,6 +7,8 @@ public record DadosCadastroCurso(
         @NotBlank
         String titulo,
         @NotNull
-        Integer semestres
+        Integer semestres,
+        @NotBlank
+        String descricao
 ) {
 }

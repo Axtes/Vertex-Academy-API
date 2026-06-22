@@ -22,13 +22,8 @@ public class Turma {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @ManyToMany
-    @JoinTable(
-            name = "turma_aluno",
-            joinColumns = @JoinColumn(name = "turma_id"),
-            inverseJoinColumns = @JoinColumn(name = "aluno_id")
-    )
-    private List<Usuario> alunos = new ArrayList<>();
+    @OneToMany(mappedBy = "turma")
+    private List<Aluno> alunos = new ArrayList<>();
     @ManyToOne
     @JoinColumn(name = "curso_id")
     private Curso curso;
@@ -44,17 +39,21 @@ public class Turma {
     private Integer semestre;
     private Integer ano;
 
-    public void gerarCodigoTurma(Turma turma){
+    public void gerarCodigoTurma(){
         LocalDate data = LocalDate.now();
         ano = data.getYear();
         semestre = data.getMonthValue() <= 6 ? 1 : 2;
 
         String codigo =
-                turma.getCurso().getCodigoCurso()
-                        + turma.getAno()
-                        + String.format("%02d", turma.getSemestre())
-                        + turma.getReferencia();
+                curso.getCodigoCurso()
+                        + ano
+                        + String.format("%02d", semestre)
+                        + referencia;
 
-        turma.setCodigoTurma(codigo);
+        this.setCodigoTurma(codigo);
+    }
+
+    public boolean estaLotada() {
+        return alunos.size() >= 40;
     }
 }

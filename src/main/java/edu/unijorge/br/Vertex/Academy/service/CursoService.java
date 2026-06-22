@@ -16,6 +16,7 @@ public class CursoService {
 
         curso.setTitulo(dados.titulo());
         curso.setSemestres(dados.semestres());
+        curso.setDescricao(dados.descricao());
 
         curso = cursoRepository.save(curso);
 

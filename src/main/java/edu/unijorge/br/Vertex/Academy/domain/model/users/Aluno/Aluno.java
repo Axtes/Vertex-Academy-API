@@ -5,26 +5,30 @@ import edu.unijorge.br.Vertex.Academy.domain.model.entities.Turma;
 import edu.unijorge.br.Vertex.Academy.domain.model.users.Usuario.Usuario;
 import jakarta.persistence.*;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
-import java.time.LocalDate;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
 @Entity
-@PrimaryKeyJoinColumn(name = "id")
 @Table(name = "alunos")
 @Setter
 @Getter
+@NoArgsConstructor
+@PrimaryKeyJoinColumn(name = "id")
 public class Aluno extends Usuario {
 
-    @OneToOne
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "curso_id")
     private Curso curso;
 
-    @OneToOne
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "turma_id")
     private Turma turma;
 
 
