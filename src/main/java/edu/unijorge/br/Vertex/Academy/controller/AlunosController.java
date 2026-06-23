@@ -30,19 +30,4 @@ public class AlunosController {
 
         return ResponseEntity.ok().build();
     }
-
-    @GetMapping("/aluno/me")
-    @SecurityRequirement(name = "bearer-key")
-    public ResponseEntity<AlunoResponseDTO> meusDados(
-            Authentication authentication
-    ) {
-
-        Usuario aluno = (Usuario) authentication.getPrincipal();
-
-
-        AlunoResponseDTO dto =
-                alunoService.buscarDadosAluno(aluno.getId());
-
-        return ResponseEntity.ok(dto);
-    }
 }

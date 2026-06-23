@@ -3,6 +3,7 @@ package edu.unijorge.br.Vertex.Academy.service;
 import edu.unijorge.br.Vertex.Academy.domain.model.entities.Curso;
 import edu.unijorge.br.Vertex.Academy.domain.model.entities.CursoRepository;
 import edu.unijorge.br.Vertex.Academy.domain.model.entities.DadosCadastroCurso;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,6 +12,7 @@ public class CursoService {
     @Autowired
     CursoRepository cursoRepository;
 
+    @Transactional
     public Curso cadastrarCurso(DadosCadastroCurso dados) {
         Curso curso = new Curso();
 

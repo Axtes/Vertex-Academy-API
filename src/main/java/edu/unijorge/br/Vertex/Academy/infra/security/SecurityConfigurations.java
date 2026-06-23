@@ -43,6 +43,7 @@ public class SecurityConfigurations {
                         .requestMatchers(HttpMethod.GET,"/aluno/me").hasAuthority("ROLE_STUDENT")
                         .requestMatchers(HttpMethod.GET, "/cursos/listagem").permitAll()
                         .requestMatchers("/service/usuarios/cpf/**").permitAll()
+                        .requestMatchers("/api/dashboard/me").hasAnyAuthority("ROLE_ADMIN", "ROLE_TEACHER", "ROLE_STUDENT", "ROLE_USER")
                         .anyRequest().authenticated())
                 .addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class)
                 .build();

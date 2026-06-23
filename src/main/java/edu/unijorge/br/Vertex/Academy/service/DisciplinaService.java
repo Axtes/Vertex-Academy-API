@@ -3,6 +3,7 @@ package edu.unijorge.br.Vertex.Academy.service;
 import edu.unijorge.br.Vertex.Academy.domain.model.entities.DadosCadastroDisciplina;
 import edu.unijorge.br.Vertex.Academy.domain.model.entities.Disciplina;
 import edu.unijorge.br.Vertex.Academy.domain.model.entities.DisciplinaRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,6 +12,7 @@ public class DisciplinaService {
     @Autowired
     private DisciplinaRepository disciplinaRepository;
 
+    @Transactional
     public Disciplina cadastrarDisciplina(DadosCadastroDisciplina dados) {
         Disciplina disciplina = new Disciplina();
 
